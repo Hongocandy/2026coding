@@ -1,0 +1,13 @@
+#week01-1.py
+#偶數/2 奇數+1 問甚麼時候變1
+class Solution:
+    def numSteps(self, s: str) -> int:
+        ans=0  #總共要走幾步
+        n=int(s,2) #把字串s當二進為整數變成n
+        while n>1: #目標:n最後會變成1
+            if n%2==0: n=n//2 #偶數//2
+            else: n=n+1 #奇數+1
+            ans+=1 #又多做了一步喔!
+        return ans
+
+        
