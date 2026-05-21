@@ -1,0 +1,24 @@
+#week13-5.py 2542.
+class Solution:
+    def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        #先把nums1跟nums2合併起來
+        #ex. [1,3,3,2]
+        #    [2,1,3,4]
+        N=len(nums1) #陣列的長度
+        a=[(nums2[i],nums1[i]) for i in range(N)] #左右合併起來
+        #print(a)
+        #a.sort() #小到大排好
+        #print(a)
+        a.sort(reverse=True) #大到小排好
+        #print(a)
+
+        heap=[a[i][1] for i in range(k)] #找到最前面的k組數字 加入heap資料結構
+        heapify(heap) #之後將小到大依序吐掉nums1的這k個數 換加入新的n1,n2組
+        total=sum(heap)
+        ans=total*a[k-1][0] #前k項的nums1及對應最小的nums3相乘
+
+        for i in range(k,len(nums2)): #後面將加入的數
+            n2,n1=a[i] #將加入的對應的數
+            heappush(heap,n1) #加1
+            ans=max(ans,total*n2) #更新答案
+        return ans
